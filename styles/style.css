@@ -1,0 +1,69 @@
+:root{
+    --theme-color: #db2777;
+}
+.bg-slate
+{
+    background-color: #1f2937;
+}
+
+.bg-darkPink
+{
+    background-color:var(--theme-color) !important;
+}
+::placeholder
+{
+    color: var(--theme-color) !important;
+    opacity: 0.5 !important;
+}
+.form-control
+{
+    transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+}
+.form-control:focus
+{
+    box-shadow:0 0 5px var(--theme-color);
+    border: var(--theme-color);
+    transition: all 0.4s ease-in-out;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+}
+
+.themes{
+    display: flex;
+    width: 200px;
+    align-items: center;
+    justify-content:start;
+}
+.themes button{
+    height: 25px;
+    width: 25px;
+    border: 3px solid #fff9f9;
+    outline: none;
+    border-radius: 20%;
+    cursor: pointer;
+    -webkit-border-radius: 20%;
+    -moz-border-radius: 20%;
+    -ms-border-radius: 20%;
+    -o-border-radius: 20%;
+}
+.btn1{
+    background-color: #22d3ee;
+}
+.btn2{
+    background-color: #db2777;
+}
+.btn3{
+    background-color: #42fd09;
+}
+.btn4{
+    background-color: #a434ff;
+}
+.btn5{
+    background-color: #fe802d;
+}
