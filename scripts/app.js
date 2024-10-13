@@ -16,11 +16,11 @@ myColor.forEach(function(color)
 function loadTasks() {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const taskList = document.getElementById('taskList');
-    const taskCount = document.getElementById('taskCount');
-    taskCount.textContent += ` ${tasks.length}`;
+    // const taskCount = document.getElementById('taskCount');
+    // taskCount.textContent += `${tasks.length}`;
     taskList.innerHTML = '';
     tasks.forEach((task, index) => {
-        const liItem =`<li class="d-flex ps-3 mt-3 justify-content-between align-items-center w-100 mx-auto border border-user rounded-3">
+        const liItem =`<li class="d-flex ps-3 mt-3 justify-content-between align-items-center gap-1 w-100 mx-auto border border-user rounded-3">
         <div class="col-12">
           <span class="fs-5">${task}</span>
         </div>
@@ -36,7 +36,7 @@ function loadTasks() {
       `;
       taskList.insertAdjacentHTML('beforeend', liItem);
       document.getElementById('deleteButton').addEventListener('click', removeTask);
-      document.getElementById('editButton').addEventListener('click', editTask);
+    //   document.getElementById('editButton').addEventListener('click', editTask);
       
     });
 }
@@ -60,10 +60,20 @@ function removeTask(index) {
     tasks.splice(index, 1);
     localStorage.setItem('tasks', JSON.stringify(tasks));
     loadTasks();
+    taskCount();
 }
 
 // رویداد برای دکمه اضافه کردن تسک
 document.getElementById('addButton').addEventListener('click', addTask);
 
+function taskCount()
+{
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const taskCount = document.getElementById('taskCount');
+    taskCount.textContent =" ";
+    taskCount.textContent ='Tasks To do -'+ `${tasks.length}`;
+}
 // بارگذاری تسک‌ها هنگام بارگذاری صفحه
 loadTasks();
+taskCount();
+
