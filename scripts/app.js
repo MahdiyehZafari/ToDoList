@@ -45,15 +45,17 @@ function loadTasks() {
 
         // taskList.appendChild(li);
         const liItem =`<li class="d-flex p-2 mt-3 justify-content-between align-items-center w-100 mx-auto border border-user rounded-3">
-        <div class="col-10">
+        <div class="col-9">
           <span>${task}</span>
         </div>
         <div class="col-1">
-          <button type="submit" id="deleteButton" class="btn bg-user d-flex text-white justify-content-center align-items-center "><strong>Add</strong></button>
+          <button type="submit" id="deleteButton" class="btn bg-user d-flex text-white justify-content-center align-items-center "><img src="./img/delete-svgrepo-com.svg" alt="del"></button>
         </div>
-
         <div class="col-1">
-          <button type="submit" id="editButton" class="btn bg-user d-flex text-white justify-content-center align-items-center "><strong>Add</strong></button>
+          <button type="submit" id="doneButton" class="btn bg-user d-flex text-white justify-content-center align-items-center "><img src="./img/done-1476-svgrepo-com.svg" alt="edit"></button>
+        </div>
+        <div class="col-1">
+          <button type="submit" id="editButton" class="btn bg-user d-flex text-white justify-content-center align-items-center "><img src="./img/edit-svgrepo-com.svg" alt="edit"></button>
         </div>
       </li>`;
       taskList.insertAdjacentHTML('beforeend', liItem);
