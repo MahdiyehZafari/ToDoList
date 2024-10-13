@@ -5,7 +5,11 @@
 {
     background-color: #1f2937;
 }
-
+.border-user
+{
+    border-color:var(--theme-color) !important;
+    box-shadow:0 0 5px var(--theme-color);
+}
 .bg-user
 {
     background-color:var(--theme-color) !important;

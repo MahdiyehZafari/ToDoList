@@ -13,10 +13,10 @@
         <form class="row g-3 mx-auto justify-content-center">
             <div class="col-8">
               <label for="inputTodo" class="visually-hidden">Todo</label>
-              <input type="text" class="form-control bg-transparent text-secondary" id="inputTodo" placeholder="Add a new task">
+              <input id="itemInput" type="text" class="form-control bg-transparent text-secondary" id="inputTodo" placeholder="Add a new task">
             </div>
             <div class="col-2">
-              <button type="submit" class="btn bg-user d-flex text-white justify-content-center align-items-center "><strong>Add</strong></button>
+              <button type="submit" id="addButton" class="btn bg-user d-flex text-white justify-content-center align-items-center "><strong>Add</strong></button>
             </div>
         </form>
 
@@ -33,12 +33,31 @@
         </div>
 
         <div class="row g-3 mt-5 mx-auto justify-content-center">
-          <div class="col-8">
+          <div class="col-10">
             <span class="text-user fs-4 fw-bold">Tasks To do - </span>
           </div>
         </div>
-       
 
+
+        <div class="row g-3 mt-5 mx-auto justify-content-center">
+          <ul id="taskList" style="list-style-type: none;" class="mt-5">
+            <li class="d-flex p-2 justify-content-between align-items-center w-100 mx-auto border border-user rounded-3">
+              <div class="col-10">
+                <span>hjk</span>
+              </div>
+              <div class="col-1">
+                <button type="submit" id="addButton" class="btn bg-user d-flex text-white justify-content-center align-items-center "><strong>Add</strong></button>
+              </div>
+
+              <div class="col-1">
+                <button type="submit" id="addButton" class="btn bg-user d-flex text-white justify-content-center align-items-center "><strong>Add</strong></button>
+              </div>
+            </li>
+          </ul>
+        </div>
+       
+        
+          
         
         
     </div>
