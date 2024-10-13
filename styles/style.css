@@ -6,9 +6,13 @@
     background-color: #1f2937;
 }
 
-.bg-darkPink
+.bg-user
 {
     background-color:var(--theme-color) !important;
+}
+.text-user
+{
+    color: var(--theme-color);
 }
 ::placeholder
 {
