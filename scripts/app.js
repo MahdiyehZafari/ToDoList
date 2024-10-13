@@ -16,50 +16,28 @@ myColor.forEach(function(color)
 function loadTasks() {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const taskList = document.getElementById('taskList');
+    const taskCount = document.getElementById('taskCount');
+    taskCount.textContent += ` ${tasks.length}`;
     taskList.innerHTML = '';
     tasks.forEach((task, index) => {
-        // const li = document.createElement('li');
-        // li.textContent = task;
-        // li.classList.add('d-flex', 'p-2' ,'justify-content-between', 'align-items-center', 'w-100', 'mx-auto', 'border', 'border-user', 'rounded-3')
-        // li.addEventListener('click', () => {
-        //     removeTask(index);
-        // });
-        // const deleteButton = document.createElement('button');
-        // deleteButton.textContent = 'del';
-        // deleteButton.classList.add('btn','bg-user','d-flex','text-white','justify-content-center','align-items-center'); // اضافه کردن کلاس
-        // deleteButton.addEventListener('click', (e) => {
-        //     e.stopPropagation(); // جلوگیری از فعال شدن رویداد کلیک روی li
-        //     removeTask(index);
-        // });
-        // li.appendChild(deleteButton);
-
-        // // دکمه ویرایش
-        // const editButton = document.createElement('button');
-        // editButton.textContent = 'edit';
-        // editButton.classList.add('btn','bg-user','d-flex','text-white','justify-content-center','align-items-center'); // اضافه کردن کلاس
-        // editButton.addEventListener('click', (e) => {
-        //     e.stopPropagation(); // جلوگیری از فعال شدن رویداد کلیک روی li
-        //     editTask(index);
-        // });
-        // li.appendChild(editButton);
-
-        // taskList.appendChild(li);
-        const liItem =`<li class="d-flex p-2 mt-3 justify-content-between align-items-center w-100 mx-auto border border-user rounded-3">
-        <div class="col-9">
-          <span>${task}</span>
+        const liItem =`<li class="d-flex ps-3 mt-3 justify-content-between align-items-center w-100 mx-auto border border-user rounded-3">
+        <div class="col-12">
+          <span class="fs-5">${task}</span>
         </div>
-        <div class="col-1">
+        <div class="col-1 flex">
           <button type="submit" id="deleteButton" class="btn bg-user d-flex text-white justify-content-center align-items-center "><img src="./img/delete-svgrepo-com.svg" alt="del"></button>
+        
+          <button type="submit" id="doneButton" class="btn mt-1 bg-user d-flex text-white justify-content-center align-items-center "><img src="./img/done-1476-svgrepo-com.svg" alt="edit"></button>
+       
+          <button type="submit" id="editButton" class="btn mt-1 bg-user d-flex text-white justify-content-center align-items-center "><img src="./img/edit-svgrepo-com.svg" alt="edit"></button>
         </div>
-        <div class="col-1">
-          <button type="submit" id="doneButton" class="btn bg-user d-flex text-white justify-content-center align-items-center "><img src="./img/done-1476-svgrepo-com.svg" alt="edit"></button>
-        </div>
-        <div class="col-1">
-          <button type="submit" id="editButton" class="btn bg-user d-flex text-white justify-content-center align-items-center "><img src="./img/edit-svgrepo-com.svg" alt="edit"></button>
-        </div>
-      </li>`;
+        
+      </li>
+      `;
       taskList.insertAdjacentHTML('beforeend', liItem);
-    
+      document.getElementById('deleteButton').addEventListener('click', removeTask);
+      document.getElementById('editButton').addEventListener('click', editTask);
+      
     });
 }
 
