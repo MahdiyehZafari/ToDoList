@@ -72,6 +72,11 @@ function removeTask(index) {
 function editTask(index) {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     if (tasks[index]) {
+        if (tasks[index].completed) {
+            alert('این تسک انجام شده است و نمی‌توانید آن را ویرایش کنید.'); // پیام خطا
+            return; // جلوگیری از ویرایش
+        }
+        
         const newTask = prompt('ویرایش تسک:', tasks[index].text); // دسترسی به متن تسک
 
         if (newTask !== null && newTask.trim() !== '') { // بررسی ورودی جدید
@@ -88,6 +93,7 @@ function complateTask(index) {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     if (tasks[index]) {
         tasks[index].completed = !tasks[index].completed; // تغییر وضعیت انجام شده
+     
         localStorage.setItem('tasks', JSON.stringify(tasks)); // ذخیره تسک‌های به‌روزرسانی شده
         loadTasks(); // بارگذاری مجدد تسک‌ها
     }
