@@ -16,13 +16,13 @@ myColor.forEach(function(color)
 function loadTasks() {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const taskList = document.getElementById('taskList');
-    // const taskCount = document.getElementById('taskCount');
-    // taskCount.textContent += `${tasks.length}`;
+    const taskCount = document.getElementById('taskCount');
     taskList.innerHTML = '';
+
     tasks.forEach((task, index) => {
-        const liItem =`<li class="d-flex ps-3 mt-3 justify-content-between align-items-center gap-1 w-100 mx-auto border border-user rounded-3">
+        const liHTML = `<li class="d-flex ps-3 mt-3 justify-content-between align-items-center gap-1 w-100 mx-auto border border-user rounded-3 ${task.completed ? 'completed' : ''}">
         <div class="col-12">
-          <span class="fs-5">${task}</span>
+          <span class="fs-5">${task.text}</span>
         </div>
         <div class="col-1 flex">
           <button type="submit" id="deleteButton" class="btn bg-user d-flex text-white justify-content-center align-items-center "><img src="./img/delete-svgrepo-com.svg" alt="del"></button>
@@ -31,49 +31,78 @@ function loadTasks() {
        
           <button type="submit" id="editButton" class="btn mt-1 bg-user d-flex text-white justify-content-center align-items-center "><img src="./img/edit-svgrepo-com.svg" alt="edit"></button>
         </div>
-        
       </li>
       `;
-      taskList.insertAdjacentHTML('beforeend', liItem);
-      document.getElementById('deleteButton').addEventListener('click', removeTask);
-    //   document.getElementById('editButton').addEventListener('click', editTask);
-      
+        taskList.insertAdjacentHTML('beforeend', liHTML);
+        taskList.querySelector(`li:last-child #deleteButton`).addEventListener('click',() => removeTask(index));
+        taskList.querySelector(`li:last-child #editButton`).addEventListener('click',() => editTask(index));
+        taskList.querySelector(`li:last-child #doneButton`).addEventListener('click' ,() => complateTask(index))
     });
 }
 
 // تابع برای اضافه کردن تسک جدید
 function addTask() {
     const taskInput = document.getElementById('itemInput');
-    const task = taskInput.value.trim();
-    if (task) {
+    const taskText = taskInput.value;
+    if (taskText) {
         const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-        tasks.push(task);
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-        taskInput.value = '';
-        loadTasks();
+        tasks.push({ text: taskText, completed: false }); // اضافه کردن تسک جدید
+        try {
+            localStorage.setItem('tasks', JSON.stringify(tasks)); // ذخیره تسک جدید در لوکال استوریج
+            console.log('Tasks saved:', tasks);
+        } catch (error) {
+            console.error('Error saving to localStorage', error);
+        }
+        taskInput.value = ''; // پاک کردن ورودی
+        loadTasks(); // بارگذاری مجدد تسک‌ها
+    } else {
+        console.log('No task entered'); // اگر تسکی وارد نشده باشد
     }
 }
-
 // تابع برای حذف تسک
 function removeTask(index) {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    tasks.splice(index, 1);
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-    loadTasks();
-    taskCount();
+    if (tasks[index]) {
+        tasks.splice(index, 1); // حذف تسک
+        localStorage.setItem('tasks', JSON.stringify(tasks)); // ذخیره تسک‌های به‌روزرسانی شده
+        loadTasks(); // بارگذاری مجدد تسک‌ها
+    }
 }
+// تابع برای ویرایش
+function editTask(index) {
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    if (tasks[index]) {
+        const newTask = prompt('ویرایش تسک:', tasks[index].text); // دسترسی به متن تسک
 
+        if (newTask !== null && newTask.trim() !== '') { // بررسی ورودی جدید
+            tasks[index].text = newTask; // به‌روزرسانی متن تسک
+            localStorage.setItem('tasks', JSON.stringify(tasks)); // ذخیره تسک‌های به‌روزرسانی شده
+            loadTasks(); // بارگذاری مجدد تسک‌ها
+        }
+    } else {
+        console.error("تسکی با این ایندکس وجود ندارد."); // پیام خطا در صورت عدم وجود تسک
+    }
+}
+// وضعیت تسک 
+function complateTask(index) {
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    if (tasks[index]) {
+        tasks[index].completed = !tasks[index].completed; // تغییر وضعیت انجام شده
+        localStorage.setItem('tasks', JSON.stringify(tasks)); // ذخیره تسک‌های به‌روزرسانی شده
+        loadTasks(); // بارگذاری مجدد تسک‌ها
+    }
+}
 // رویداد برای دکمه اضافه کردن تسک
 document.getElementById('addButton').addEventListener('click', addTask);
-
+// بارگذاری تسک‌ها هنگام بارگذاری صفحه
 function taskCount()
 {
     const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const taskCount = document.getElementById('taskCount');
     taskCount.textContent =" ";
-    taskCount.textContent ='Tasks To do -'+ `${tasks.length}`;
+    taskCount.textContent ='Task To do -'+ `${tasks.length}`;
 }
-// بارگذاری تسک‌ها هنگام بارگذاری صفحه
+
 loadTasks();
 taskCount();
 

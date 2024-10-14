@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تودو لیست</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .task-item {
+            background-color: #f0f0f0;
+            padding: 10px;
+            margin: 5px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+        .delete-button, .edit-button, .complete-button {
+            margin-left: 10px;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .delete-button {
+            background-color: #ff4d4d;
+            color: white;
+        }
+        .edit-button {
+            background-color: #4d94ff;
+            color: white;
+        }
+        .complete-button {
+            background-color: #28a745;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div id="taskCount">تعداد تسک‌ها: 0</div>
+<ul id="taskList"></ul>
+<input type="text" id="taskInput" placeholder="تسک جدید">
+<button id="addTaskButton">اضافه کردن تسک</button>
+
+<script>
+    function loadTasks() {
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        const taskList = document.getElementById('taskList');
+        const taskCount = document.getElementById('taskCount');
+        taskList.innerHTML = '';
+
+        tasks.forEach((task, index) => {
+            const liHTML = `
+                <li class="task-item ${task.completed ? 'completed' : ''}">
+                    <span>${task.text}</span>
+                    <button class="complete-button">${task.completed ? 'بازگشت به تسک' : 'انجام شده'}</button>
+                    <button class="delete-button">حذف</button>
+                    <button class="edit-button">ویرایش</button>
+                </li>
+            `;
+            taskList.insertAdjacentHTML('beforeend', liHTML);
+        });
+
+        taskCount.textContent = `تعداد تسک‌ها: ${tasks.length}`;
+    }
+
+    function addTask() {
+        const taskInput = document.getElementById('taskInput');
+        const taskText = taskInput.value.trim();
+        if (taskText) {
+            const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            tasks.push({ text: taskText, completed: false });
+            try {
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                console.log('Tasks saved:', tasks);
+            } catch (error) {
+                console.error('Error saving to localStorage', error);
+            }
+            taskInput.value = '';
+            loadTasks();
+        } else {
+            console.log('No task entered');
+        }
+    }
+
+    document.getElementById('addTaskButton').addEventListener('click', addTask);
+    loadTasks();
+</script>
+
+</body>
+</html>
