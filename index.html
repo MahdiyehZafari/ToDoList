@@ -9,8 +9,14 @@
 </head>
 <body class="bg-body-tertiary">
     <div class="container p-4">
+        <label class="ui-switch ms-5">
+          <input type="checkbox" id="theme-switch">
+          <div class="slider">
+            <div class="circle"></div>
+          </div>
+        </label>
 
-        <form class="row g-3 mx-auto justify-content-center">
+        <form class="row g-3 mx-auto justify-content-center mt-5">
             <div class="col-8">
               <label for="inputTodo" class="visually-hidden">Todo</label>
               <input id="itemInput" autocomplete="off" type="text" class="form-control bg-transparent text-secondary" id="inputTodo" placeholder="Add a new task">

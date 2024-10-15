@@ -111,4 +111,28 @@ function taskCount()
 
 loadTasks();
 taskCount();
+window.addEventListener("load", function () {
+    document.getElementById("itemInput").focus()
+})
 
+// darkMood
+
+document.addEventListener("DOMContentLoaded", function() {
+    const themeSwitch = document.getElementById("theme-switch");
+  
+    // Function to toggle dark mode
+    function toggleDarkMode() {
+      if (themeSwitch.checked) {
+        document.body.classList.add("bg-slate")
+        document.body.classList.remove("bg-body-tertiary")
+        document.body.style.color = "white"; // Light text color
+      } else {
+        document.body.classList.remove("bg-slate")
+        document.body.classList.add("bg-body-tertiary")        
+        document.body.style.color = "black"; // Dark text color
+      }
+    }
+  
+    // Add event listener on the checkbox
+    themeSwitch.addEventListener("change", toggleDarkMode);
+  });
